@@ -1,8 +1,8 @@
-const validator = require("validator");
-const isEmpty = require("./empty");
+import validator from "validator";
+import isEmpty from "./empty.js";
 const Regex=/^(?=.*\d)(?=.*[a-z])(?=.*[@$!%?&])(?=.*[A-Z]).{8,}/;
 const Regex1=/(?=.*[ ])/;
-module.exports = function SignupValidation(data) {
+export default function SignupValidation(data) {
 
   let errors = {};
   // Convert empty fields to an empty string so we can use validator

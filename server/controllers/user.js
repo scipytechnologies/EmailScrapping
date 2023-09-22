@@ -2,10 +2,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 // Load User model
-import User from "../model/userSchema";
+import User from "../model/userSchema.js";
 // Load input validation
-import SignupValidation from "../validator/signup";
-import SigninValidation from "../validator/signin";
+import SignupValidation from "../validator/signup.js";
+import SigninValidation from "../validator/signin.js";
 
 //  ---------------------------------------- //signup method to add a new user//--------------------------- //
 
