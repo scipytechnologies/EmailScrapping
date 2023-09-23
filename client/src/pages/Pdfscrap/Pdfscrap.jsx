@@ -138,7 +138,7 @@ const Pdfscrap = () => {
 
     return (
         <div className="container mt-5">
-            <h2>PDF Scraper</h2>
+            <h1>PDF Scraper</h1>
             <div className="mb-3">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="urlInput" className="form-label">Enter URL:</label>

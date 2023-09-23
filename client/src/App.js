@@ -21,7 +21,7 @@ function App() {
       <Snackbar />
         <Routes>
           <Route path="/" element={<LandingPage/>} />
-          <Route path="/Home" element={<Home/>} />
+          <Route path="/Home" element={<Home />} />
           <Route path="Pdfscrap" element={<Pdfscrap/>} />
           <Route path="MultiEmail" element={<MultiEmailValidation/>}/>
           <Route path="EmailValidator" element={<EmailVerificationForm />}/>

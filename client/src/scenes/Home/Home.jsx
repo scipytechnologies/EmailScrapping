@@ -1,35 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
-function Home({userId}) {
-  const navigate = useNavigate()
-  const [user, setUser] = useState(null);
+import axios from 'axios';
+
+function Home() {
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Make an HTTP request to your backend to fetch user data
-    fetch(`http://localhost:8000/user/getuser/${userId}`)
-      .then((response) => response.json())
-      .then((data) => setUser(data))
-      .catch((error) => console.error('Error fetching user data:', error));
-  }, [userId]);
+    const fetchUserData = async () => {
+      try {
+        // Replace '123' with the actual user ID you want to fetch from your backend
+        const userId = response.data.id;
+
+        // Fetch user data using the "get by ID" method from your backend
+        const response = await axios.get(`http://localhost:8000/user/getuser/${userId}`); // Replace with your actual backend endpoint
+        setUserData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []); // No need to depend on any prop, as the user ID is hardcoded or fetched from your backend
 
   return (
-    <div className="container-lg d-flex align-items-center justify-content-center flex-column" style={{ height: '100vh' }}>
-      <h1 className="display-2 mb-4">Home page</h1>
-
-
-
-      {user ? (
-        <div>
-          
-          <p>Welcome {user.firstName} {user.lastName}</p>
-          {/* <p>Last Name: {user.lastName}</p> */}
-      
-        </div>
+    <div>
+      <h2>User Information</h2>
+      {loading ? (
+        <p>Loading user data...</p>
       ) : (
-        <p>Loading...</p>
+        <div>
+          <p>First Name: {userData.firstName}</p>
+          <p>Last Name: {userData.lastName}</p>
+          <p>Email: {userData.email}</p>
+        </div>
       )}
     </div>
-
   );
-};
-export default Home
+}
+
+export default Home;
