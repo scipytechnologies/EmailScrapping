@@ -109,7 +109,7 @@ export const getUser = async (req, res) => {
         const userdata = await User.findById(id);
         const data = {
             firstName: userdata.firstName,
-            LastName: userdata.lastName,
+            lastName: userdata.lastName,
             email: userdata.email
         }
         res.status(200).json(data)

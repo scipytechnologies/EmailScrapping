@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux'
+import { isConnected, loggeduser, setToken, setUserProfile } from '../../store/loginedUser'
 
 function UserSignin() {
+    const dispatch = useDispatch();
+    const active = useSelector((state) => state.loginedUser?.isConnected)
+    const user = useSelector((state) => state.loginedUser);    
 
     const [form, setForm] = useState({})
-    const[id] = useState("")
+    // const[id] = useState("")
     const onChangeHandler = (event) => {
-        setForm({
+        setForm({  
             ...form,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value  
         })
     }
 
@@ -24,6 +29,9 @@ function UserSignin() {
             toast.success("Login Successfully");
             const token = response.data.token
             localStorage.setItem('token',JSON.stringify(token))
+            dispatch(loggeduser(response.data._id));
+            dispatch(isConnected());
+            dispatch(setToken(response.data.token));
             navigate("/Home")
         })
         .catch((err)=> console.log(err));
