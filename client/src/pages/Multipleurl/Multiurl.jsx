@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as XLSX from 'xlsx';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 function MultiScrap() {
   const [file, setFile] = useState(null);
@@ -99,10 +99,18 @@ function MultiScrap() {
         <input className="form-control" id="urlInput" type="file" accept=".txt" onChange={handleFileChange} />
       </form>
       <div className="mb-3">
-        <button className="btn btn-primary" onClick={handleScrap} disabled={loading}>
-          {loading ? 'Loading...' : 'Scrap Emails'}
-        </button>
-        <button className="btn btn-success" onClick={handleDownload} disabled={emailData.length === 0}>
+        {loading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem'}}>
+                <PropagateLoader  color="#2b158d" width="20" />
+                </div>
+            ) : (
+              <button className="btn btn-primary" onClick={handleScrap} disabled={loading}>
+                    Show Emails
+                </button>
+            )}
+
+
+        <button className="btn btn-primary" onClick={handleDownload} disabled={emailData.length === 0}>
           Download CSV
         </button>
       </div>

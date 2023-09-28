@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const EmailValidationForm = () => {
   // State variables
@@ -54,13 +55,19 @@ const EmailValidationForm = () => {
           disabled={loading} // Disable the input during processing
         />
       </div>
-      <button
-        className="btn btn-primary"
-        onClick={handleVerifyEmail}
-        disabled={loading} // Disable the button during processing
-      >
-        {loading ? 'Verifying...' : 'Verify Email'}
-      </button>
+      
+           {loading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem'}}>
+                <PropagateLoader  color="#2b158d" width="20" />
+                </div>
+            ) : (
+              <button
+              className="btn btn-primary"
+              onClick={handleVerifyEmail}
+              disabled={loading} // Disable the button during processing
+            >Verify Email</button>
+            )}
+
       {validationResult && (
         <div className="mt-4">
           <h3>Email Validation Result:</h3>

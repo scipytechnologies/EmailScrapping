@@ -1,7 +1,7 @@
 import express from 'express'
 import {singleurlController, multipleurlController} from '../controllers/scrapeController.js'
 import {verifyEmail} from '../controllers/verifyEmail.js'
-import { multiverifyEmail } from '../controllers/multiverifyEmail.js';
+import { multiverifyEmails } from '../controllers/multiverifyEmail.js';
 import { scrapePdfsController } from '../controllers/pdfController.js'
 const router = express.Router()
 
@@ -17,7 +17,7 @@ router.post('/pdfscrap', scrapePdfsController)
 
 router.post("/verifyemail", verifyEmail);
 
-router.post("/multiverifyemail", multiverifyEmail)
+router.post("/multiverifyemail", multiverifyEmails)
 
 export default router
 
