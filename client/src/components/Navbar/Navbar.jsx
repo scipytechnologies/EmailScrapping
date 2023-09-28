@@ -1,7 +1,7 @@
 
 import { toast } from "react-toastify";
 import React from 'react';
-import { logout } from '../../store/auth';
+import { logout } from '../../store/loginedUser';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './appbar.css'
