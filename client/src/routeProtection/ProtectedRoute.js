@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const ProtectedRoute = ({ user, children }) => {
   console.log(user)
   if (!user) {
-    return <Navigate to="/scenes/Login/Signin" replace />;
+    return <Navigate to="/Login" replace />;
   }
 
   return children;

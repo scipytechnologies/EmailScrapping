@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    token: localStorage.getItem('authToken') || null,
     isConnected: false,
     firstName: '',
     lastName: '',
@@ -14,6 +13,9 @@ export const LoginedUserSlice = createSlice({
     reducers: {
         loggeduser : (state,action ) => {
             state.id = action.payload   
+        },
+        logout :(state)=> {
+             state.isConnected =false
         },
         setToken: (state, action) => {
             state.token = action.payload;
@@ -36,6 +38,6 @@ export const LoginedUserSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setToken, clearToken, isConnected, loggeduser, setUserProfile } = LoginedUserSlice.actions
+export const { setToken, clearToken, isConnected, loggeduser, setUserProfile,logout } = LoginedUserSlice.actions
 
 export default LoginedUserSlice.reducer

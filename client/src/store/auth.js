@@ -14,6 +14,7 @@ export const LoginedUserSlice = createSlice({
         },
         isLoggedIn: (state) => {
             state.isLoggedIn = true
+            console.log("connected");
         },
         isNotLoggedIn: (state) => {
             state.isLoggedIn = false
