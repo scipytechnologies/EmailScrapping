@@ -161,7 +161,7 @@ const Pdfscrap = () => {
                 </div>
             ) : (
                 <button className="btn btn-primary" type="submit" onClick={handleSubmit} disabled={loading}>
-                    Show Emails
+                    Pdf Scrap
                 </button>
             )}
             

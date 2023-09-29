@@ -81,7 +81,7 @@ const MultiEmailValidation = () => {
                 </div>
             ) : (
               <button className="btn btn-primary" onClick={handleValidation} disabled={loading}>
-                    Show Emails
+                    Verify Emails
                 </button>
             )}
 
