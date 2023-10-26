@@ -46,7 +46,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
@@ -90,16 +90,44 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="container mt-4">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">User Details</h5>
-            <p className="card-text">First Name: {user.firstName}</p>
-            <p className="card-text">Last Name: {user.lastName}</p>
-            <p className="card-text">Email: {user.email}</p>
+
+      <div className="container mt-4" style={{ display: 'flex' }}>
+        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
+          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p className="card-text">1</p>
+            <NavLink to="/Scrap"><button type="button" class="btn btn-primary">Web Scrape</button></NavLink>
+          </div>
+        </div>
+
+        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
+          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p className="card-text">2</p>
+            <NavLink to="/Multiurl"><button type="button" class="btn btn-primary">Multi Web Scrape</button></NavLink>
+          </div>
+        </div>
+
+        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
+          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p className="card-text">3</p>
+            <NavLink to="/EmailValidator"><button type="button" class="btn btn-primary">Email Validator</button></NavLink>
+          </div>
+        </div>
+
+        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
+          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p className="card-text">4</p>
+            <NavLink to="/MultiEmail"><button type="button" class="btn btn-primary">Multi Email Validator</button></NavLink>
+          </div>
+        </div>
+
+        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
+          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p className="card-text">5</p>
+            <NavLink to="/Pdfscrap"><button type="button" class="btn btn-primary">PDF Extractor</button></NavLink>
           </div>
         </div>
       </div>
+
     </>
   );
 };

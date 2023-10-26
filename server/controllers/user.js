@@ -118,3 +118,22 @@ export const getUser = async (req, res) => {
 
     }
 }
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({});
+        console.log(users)
+        const userData = users.map(user => ({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role
+        }));
+        res.status(200).json(userData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
