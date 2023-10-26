@@ -39,13 +39,13 @@ function UserSignin() {
     return (
         <>
             <div className="container mb-5">
-                <div className="container-sm w-50 shadow p-3 mt-5 bg-body-tertiary rounded">
+                <div className="container-sm w-50 shadow p-5 mt-5 bg-body-tertiary rounded">
                     <h1 className="display-6 mb-4">Login</h1>
                     <form>
                         <div className="mb-3">
                             <label className="form-label">Email</label>
                             <input className="form-control" type="text" aria-describedby="emailHelp" name="email" id="email" onChange={onChangeHandler}/>
-                            <div  className="form-text" id="emailHelp">We'll never share your email with anyone else.</div>
+                            <div  className="form-text" id="emailHelp"></div>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Password</label>

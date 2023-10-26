@@ -42,9 +42,9 @@ const EmailValidationForm = () => {
 
   return (
     <div className="container mt-5">
-      <h1>Email Verification</h1>
+      <h1>Email Validator</h1>
       <div className='mb-3'>
-      <label htmlFor="urlInput" className="form-label">Enter Email:</label>
+        <label htmlFor="urlInput" className="form-label">Enter Email:</label>
         <input
           type="email"
           className="form-control"
@@ -55,18 +55,18 @@ const EmailValidationForm = () => {
           disabled={loading} // Disable the input during processing
         />
       </div>
-      
-           {loading ? (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem'}}>
-                <PropagateLoader  color="#2b158d" width="20" />
-                </div>
-            ) : (
-              <button
-              className="btn btn-primary"
-              onClick={handleVerifyEmail}
-              disabled={loading} // Disable the button during processing
-            >Verify Email</button>
-            )}
+
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem' }}>
+          <PropagateLoader color="#2b158d" width="20" />
+        </div>
+      ) : (
+        <button
+          className="btn btn-primary"
+          onClick={handleVerifyEmail}
+          disabled={loading} // Disable the button during processing
+        >Verify Email</button>
+      )}
 
       {validationResult && (
         <div className="mt-4">
@@ -74,7 +74,7 @@ const EmailValidationForm = () => {
           <div className="email-container">
             <p>
               <span>The Email {displayemail} is </span>
-              <span style={{ color: validationResult.valid ? 'green' : 'red' }}>
+              <span style={{ color: validationResult.valid ? 'green' : 'red',  fontWeight: 'bold' }}>
                 {validationResult.valid ? 'Valid' : 'Invalid'}
               </span>
             </p>
@@ -88,13 +88,15 @@ const EmailValidationForm = () => {
                 <li>The MX is {validationResult.validators.mx.valid ? 'Valid' : 'Invalid'}</li>
                 <li>
                   The SMTP is {validationResult.validators.smtp.valid ? 'Valid' : 'Invalid'}
-                  {validationResult.validators.smtp.reason && (
+                  {validationResult.validators.smtp.reason && !validationResult.valid && (
                     <p>Reason: {validationResult.validators.smtp.reason}</p>
                   )}
                 </li>
               </ul>
             </p>
-            <p>Reason: {validationResult.reason}</p>
+            {validationResult.reason && !validationResult.valid && (
+              <p>Reason: {validationResult.reason}</p>
+            )}
           </div>
         </div>
       )}

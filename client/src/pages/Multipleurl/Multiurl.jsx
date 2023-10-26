@@ -91,7 +91,7 @@ function MultiScrap() {
 
   return (
     <div className="container mt-5">
-      <h1>Multiple Email Scraper</h1>
+      <h1>Multi Web Scrape</h1>
       <form className="mb-3">
         <label htmlFor="urlInput" className="form-label">
           Upload a Text File:
@@ -100,19 +100,15 @@ function MultiScrap() {
       </form>
       <div className="mb-3">
         {loading ? (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem'}}>
-                <PropagateLoader  color="#2b158d" width="20" />
-                </div>
-            ) : (
-              <button className="btn btn-primary" onClick={handleScrap} disabled={loading}>
-                    Show Emails
-                </button>
-            )}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem' }}>
+            <PropagateLoader color="#2b158d" width="20" />
+          </div>
+        ) : (
+          <button className="btn btn-primary" onClick={handleScrap} disabled={loading}>
+            Show Emails
+          </button>
+        )}
 
-
-        <button className="btn btn-primary" onClick={handleDownload} disabled={emailData.length === 0}>
-          Download CSV
-        </button>
       </div>
       {loading && <div className="loader"></div>} {/* Loader */}
       {!loading && error && <p className="error">{error}</p>} {/* Error message */}
@@ -136,7 +132,7 @@ function MultiScrap() {
               <ul>
                 {emailData.map((item, index) => (
                   <li key={index}>
-                    <strong>URL:</strong> {item.url} 
+                    <strong>URL:</strong> {item.url}
                     <p>Total Emails Scraped: {item.emails.length} emails</p>
                     <ul>
                       {item.emails.map((email, i) => (
@@ -150,7 +146,14 @@ function MultiScrap() {
           </div>
         </div>
       )}
+
+      {emailData.length > 0 ? (
+        <button className="btn btn-primary" onClick={handleDownload} disabled={emailData.length === 0}>
+          Download CSV
+        </button>
+      ) : null}
     </div>
+
   );
 }
 

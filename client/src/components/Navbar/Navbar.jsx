@@ -75,11 +75,11 @@ function NavBar() {
                 <div>Email Extraction System</div>
                 <div>
                     <>
-                        <NavLink to="/Scrap">Email Scrap</NavLink>
-                        <NavLink to="/Multiurl">Emails Scrap</NavLink>
-                        <NavLink to="/EmailValidator">Email Validation</NavLink>
-                        <NavLink to="/MultiEmail">Emails Validation</NavLink>
-                        <NavLink to="/Pdfscrap">PDF Scraper</NavLink>
+                        <NavLink to="/Scrap">Web Scrape</NavLink>
+                        <NavLink to="/Multiurl">Multi Web Scrape</NavLink>
+                        <NavLink to="/EmailValidator">Email Validator</NavLink>
+                        <NavLink to="/MultiEmail">Multi Email Validator</NavLink>
+                        <NavLink to="/Pdfscrap">PDF Extractor</NavLink>
                         <button className="btn btn-dark m-3" onClick={handleLogout}>Logout</button>
                     </>
                 </div>
