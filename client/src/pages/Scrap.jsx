@@ -134,7 +134,7 @@ function Scrap() {
 
     return (
         <div className="container mt-5">
-            <h1>Email Scraper</h1>
+            <h1>Web Scrape</h1>
             <div className="mb-3">
                 <label htmlFor="urlInput" className="form-label">
                     Enter URL:
