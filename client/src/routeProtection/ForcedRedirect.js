@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const ForceRedirect = ({ user, children }) => {
     const active = useSelector((state) => state.loginedUser.token)
-    console.log(user)
-    console.log(active);
+
+    console.log(active,"active");
     if (active) {
         return <Navigate to="/Home" replace />;
     }
