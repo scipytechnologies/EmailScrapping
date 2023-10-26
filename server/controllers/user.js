@@ -71,7 +71,8 @@ export const signin = async (req, res) => {
                     };
 
                     const data = {
-                        id: user._id
+                        id: user._id,
+                        role : user.role
                     }
                     // console.log(data);
                     // res.cookie("Authorization", token, options);
@@ -110,7 +111,8 @@ export const getUser = async (req, res) => {
         const data = {
             firstName: userdata.firstName,
             lastName: userdata.lastName,
-            email: userdata.email
+            email: userdata.email,
+            role: userdata.role
         }
         res.status(200).json(data)
 
