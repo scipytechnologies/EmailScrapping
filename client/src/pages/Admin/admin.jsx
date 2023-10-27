@@ -1,55 +1,15 @@
-// import React, { useEffect, useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { useSearchParams } from 'react-router-dom';
-
-// function UserList() {
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     // Make an API request to get user data
-//     fetch('http://localhost:8000/user/getallusers') // Replace with your API endpoint
-//       .then((response) => response.json())
-//       .then((data) => setUsers(data))
-//       .catch((error) => console.error(error));
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>User List</h2>
-//       <table  className="table table-bordered">
-//         <thead>
-//           <tr>
-//             <th>First Name</th>
-//             <th>Last Name</th>
-//             <th>Email</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {users.map((user, index) => (
-//             <tr key={index}>
-//               <td>{user.firstName}</td>
-//               <td>{user.lastName}</td>
-//               <td>{user.email}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default UserList;
-
-import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 
 function UserList() {
   const [users, setUsers] = useState([]);
 
   async function fetchUsers() {
     try {
-      const response = await axios.get('http://localhost:8000/user/getallusers'); // Replace with your API endpoint
+      const response = await axios.get(
+        "http://localhost:8000/user/getallusers"
+      ); // Replace with your API endpoint
       setUsers(response.data); // Assuming your API returns an array of users
     } catch (error) {
       console.error(error);
@@ -58,7 +18,9 @@ function UserList() {
 
   async function handleDeleteUser(userId) {
     try {
-      const response = await axios.delete(`http://localhost:8000/user/deleteuser/${userId}`);
+      const response = await axios.delete(
+        `http://localhost:8000/user/deleteuser/${userId}`
+      );
 
       if (response.status === 200) {
         // If the user was successfully deleted, fetch the updated list of users
@@ -66,13 +28,13 @@ function UserList() {
         alert("Deleted");
       } else if (response.status === 403) {
         // Handle the case where the user deletion was forbidden (e.g., admin user)
-        console.log('Cannot delete admin user');
+        console.log("Cannot delete admin user");
       } else if (response.status === 404) {
         // Handle the case where the user to be deleted was not found
-        console.log('User not found');
+        console.log("User not found");
       } else {
         // Handle other errors
-        console.error('Error deleting user');
+        console.error("Error deleting user");
       }
     } catch (error) {
       console.error(error);
@@ -84,7 +46,7 @@ function UserList() {
   }, []);
 
   return (
-    <div>
+    <div style={{ margin: "50px" }}>
       <h2>User List</h2>
       <table className="table table-bordered">
         <thead>
@@ -120,6 +82,3 @@ function UserList() {
 }
 
 export default UserList;
-
-
-

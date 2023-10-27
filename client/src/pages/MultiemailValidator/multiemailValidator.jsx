@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import PropagateLoader from "react-spinners/PropagateLoader";
 
 const MultiEmailValidation = () => {
-  const [emailList, setEmailList] = useState('');
+  const [emailList, setEmailList] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false); // Added loading state
 
   const handleValidation = async () => {
     setLoading(true); // Set loading state to true when validation starts
     try {
-      const response = await axios.post('http://localhost:8000/scrape/multiverifyemail', {
-        emails: emailList.split('\n').map((email) => email.trim()),
-      });
+      const response = await axios.post(
+        "http://localhost:8000/scrape/multiverifyemail",
+        {
+          emails: emailList.split("\n").map((email) => email.trim()),
+        }
+      );
       const data = response.data;
       setResults(data);
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error("Error:", error.message);
     } finally {
       setLoading(false); // Set loading state back to false when validation is complete
     }
@@ -37,28 +40,38 @@ const MultiEmailValidation = () => {
   const downloadSpreadsheet = () => {
     const csvContent = `Email,Email Validation,Regex,MX,SMTP,Reason\n${results
       .map((item) => {
-        const email = item.email
-        const valid = item.result && item.result.valid ? 'Valid' : 'Invalid';
-        const regexValid = item.result && item.result.validators.regex.valid ? 'Valid' : 'Invalid';
-        const mxValid = item.result && item.result.validators.mx.valid ? 'Valid' : 'Invalid';
-        const smtpValid = item.result && item.result.validators.smtp.valid ? 'Valid' : 'Invalid';
-        const smtpReason = item.result && item.result.validators.smtp.reason ? item.result.validators.smtp.reason : 'N/A';
+        const email = item.email;
+        const valid = item.result && item.result.valid ? "Valid" : "Invalid";
+        const regexValid =
+          item.result && item.result.validators.regex.valid
+            ? "Valid"
+            : "Invalid";
+        const mxValid =
+          item.result && item.result.validators.mx.valid ? "Valid" : "Invalid";
+        const smtpValid =
+          item.result && item.result.validators.smtp.valid
+            ? "Valid"
+            : "Invalid";
+        const smtpReason =
+          item.result && item.result.validators.smtp.reason
+            ? item.result.validators.smtp.reason
+            : "N/A";
 
         return `${email},${valid},${regexValid},${mxValid},${smtpValid},${smtpReason}`;
       })
-      .join('\n')}`;
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+      .join("\n")}`;
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'email_validation_results.csv';
+    a.download = "email_validation_results.csv";
     a.click();
 
     window.URL.revokeObjectURL(url);
   };
 
-  console.log(results)
+  console.log(results);
   return (
     <div className="container mt-5">
       <h1>Multi Email Validator</h1>
@@ -76,42 +89,63 @@ const MultiEmailValidation = () => {
       </div>
 
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '0px', marginTop: '2rem' }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "0px",
+            marginTop: "2rem",
+          }}
+        >
           <PropagateLoader color="#2b158d" width="20" />
         </div>
       ) : (
-        <button className="btn btn-primary" onClick={handleValidation} disabled={loading}>
+        <button
+          className="btn btn-primary"
+          onClick={handleValidation}
+          disabled={loading}
+        >
           Verify Emails
         </button>
       )}
 
       <div>
-        {results.length > 0 ? (
-          results.map((item, index) => (
-            <div className='email-container' key={index}>
-              <p>Email: {item.email}</p>
-              {item.result && (
-                <div>
-                  <p>
-                    Email: {item.email}
-                    <span style={{ color: item.result.valid ? 'green' : 'red' }}>
-                      {item.result.valid ? 'Valid' : 'Invalid'}
-                    </span>
-                  </p>
-                  <p>Regex: {item.result.validators.regex.valid ? 'Valid' : 'Invalid'}</p>
-                  <p>MX: {item.result.validators.mx.valid ? 'Valid' : 'Invalid'}</p>
-                  <p>SMTP: {item.result.validators.smtp.valid ? 'Valid' : 'Invalid'}</p>
-                  {item.result.validators.smtp.reason && (
-                    <p>Reason: {item.result.validators.smtp.reason}</p>
-                  )}
-                </div>
-              )}
-            </div>
-          ))
-        ) : null}
+        {results.length > 0
+          ? results.map((item, index) => (
+              <div className="email-container" key={index}>
+                <p>Email: {item.email}</p>
+                {item.result && (
+                  <div>
+                    <p>
+                      Email: {item.email}
+                      <span
+                        style={{ color: item.result.valid ? "green" : "red" }}
+                      >
+                        {item.result.valid ? "Valid" : "Invalid"}
+                      </span>
+                    </p>
+                    <p>
+                      Regex:{" "}
+                      {item.result.validators.regex.valid ? "Valid" : "Invalid"}
+                    </p>
+                    <p>
+                      MX:{" "}
+                      {item.result.validators.mx.valid ? "Valid" : "Invalid"}
+                    </p>
+                    <p>
+                      SMTP:{" "}
+                      {item.result.validators.smtp.valid ? "Valid" : "Invalid"}
+                    </p>
+                    {item.result.validators.smtp.reason && (
+                      <p>Reason: {item.result.validators.smtp.reason}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))
+          : null}
       </div>
-
-
 
       {results.length > 0 ? (
         <button className="btn btn-primary" onClick={downloadSpreadsheet}>

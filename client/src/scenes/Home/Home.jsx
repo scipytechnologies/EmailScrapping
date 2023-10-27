@@ -1,78 +1,33 @@
-// import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-
-// const Home = () => {
-//   const [user, setUser] = useState([]);
-//   const navigate = useNavigate()
-//   useEffect(() => {
-//     const token = JSON.parse(localStorage.getItem('token'))
-//     if (token === undefined) {
-//       navigate('/Login')
-//     }
-//     else {
-//       console.log('token before', token)
-//       let body = {
-//         token
-//       }
-//       axios.post('http://localhost:8000/user/auth', body)
-//         .then((res) => {
-//           const userId = res.data?._id
-//           axios.get(`http://localhost:8000/user/getuser/${userId}`)
-//             .then((res) => {
-//               console.log('user', res.data)
-//               setUser(res.data)
-//             })
-//         })
-//         .catch((err) => {
-//           console.log('err from home', err)
-//         })
-//     }
-//   }, [])
-
-//   return (
-//     <div>
-//       {/* <h2>User Details</h2> */}
-//       <h4>Welcome {user.firstName} {user.lastName}</h4>
-//       <p>First Name: {user.firstName}</p>
-//       <p>Last Name: {user.lastName}</p>
-//       <p>Email: {user.email}</p>
-//     </div>
-//   );  
-// };
-
-// export default Home;
-
-
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = JSON.parse(localStorage.getItem("token"));
     if (!token) {
-      navigate('/Login');
+      navigate("/Login");
     } else {
-      console.log('token before', token);
+      console.log("token before", token);
       let body = {
-        token
+        token,
       };
-      axios.post('http://localhost:8000/user/auth', body)
+      axios
+        .post("http://localhost:8000/user/auth", body)
         .then((res) => {
           const userId = res.data?._id;
-          axios.get(`http://localhost:8000/user/getuser/${userId}`)
+          axios
+            .get(`http://localhost:8000/user/getuser/${userId}`)
             .then((res) => {
-              console.log('user', res.data);
+              console.log("user", res.data);
               setUser(res.data);
-            })
+            });
         })
         .catch((err) => {
-          console.log('err from home', err);
+          console.log("err from home", err);
         });
     }
   }, []);
@@ -80,7 +35,9 @@ const Home = () => {
   return (
     <>
       <div className="container mt-4">
-        <h1 className="card-subtitle mb-2 text-muted">Welcome {user.firstName} {user.lastName}</h1>
+        <h1 className="card-subtitle mb-2 text-muted">
+          Welcome {user.firstName} {user.lastName}
+        </h1>
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">User Details</h5>
@@ -91,47 +48,94 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container mt-4" style={{ display: 'flex' }}>
-        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
-          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p className="card-text">1</p>
-            <NavLink to="/Scrap"><button type="button" class="btn btn-primary">Web Scrape</button></NavLink>
+      <div className="container mt-4" style={{ display: "flex" }}>
+        <div className="card" style={{ width: "15rem", margin: "0.5rem" }}>
+          <div
+            className="card-body"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <NavLink to="/Scrap">
+              <button type="button" class="btn btn-primary">
+                Web Scrape
+              </button>
+            </NavLink>
           </div>
         </div>
 
-        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
-          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p className="card-text">2</p>
-            <NavLink to="/Multiurl"><button type="button" class="btn btn-primary">Multi Web Scrape</button></NavLink>
+        <div className="card" style={{ width: "15rem", margin: "0.5rem" }}>
+          <div
+            className="card-body"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <NavLink to="/Multiurl">
+              <button type="button" class="btn btn-primary">
+                Multi Web Scrape
+              </button>
+            </NavLink>
           </div>
         </div>
 
-        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
-          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p className="card-text">3</p>
-            <NavLink to="/EmailValidator"><button type="button" class="btn btn-primary">Email Validator</button></NavLink>
+        <div className="card" style={{ width: "15rem", margin: "0.5rem" }}>
+          <div
+            className="card-body"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <NavLink to="/EmailValidator">
+              <button type="button" class="btn btn-primary">
+                Email Validator
+              </button>
+            </NavLink>
           </div>
         </div>
 
-        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
-          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p className="card-text">4</p>
-            <NavLink to="/MultiEmail"><button type="button" class="btn btn-primary">Multi Email Validator</button></NavLink>
+        <div className="card" style={{ width: "15rem", margin: "0.5rem" }}>
+          <div
+            className="card-body"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <NavLink to="/MultiEmail">
+              <button type="button" class="btn btn-primary">
+                Multi Email Validator
+              </button>
+            </NavLink>
           </div>
         </div>
 
-        <div className="card" style={{ width: '15rem', margin: '0.5rem'  }}>
-          <div className="card-body" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p className="card-text">5</p>
-            <NavLink to="/Pdfscrap"><button type="button" class="btn btn-primary">PDF Extractor</button></NavLink>
+        <div className="card" style={{ width: "15rem", margin: "0.5rem" }}>
+          <div
+            className="card-body"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <NavLink to="/Pdfscrap">
+              <button type="button" class="btn btn-primary">
+                PDF Extractor
+              </button>
+            </NavLink>
           </div>
         </div>
       </div>
-
     </>
   );
 };
 
 export default Home;
-
-

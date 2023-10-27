@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux'
-import EmailVerificationForm from './pages/singleValidator/emailValidator'
-import MultiScrap from './pages/Multipleurl/Multiurl';
-import Scrap from './pages/Scrap';
-import MultiEmailValidation from './pages/MultiemailValidator/multiemailValidator';
-import Pdfscrap from './pages/Pdfscrap/Pdfscrap';
-import Admin from './pages/Admin/admin';
-import UserSignup from './scenes/Register/Signup';
-import Home from './scenes/Home/Home'
-import LandingPage from './scenes/LandingPage/Landingpage';
-import UserSignin from './scenes/Login/Signin';
-import NavBar from './components/Navbar/Navbar';
-import Snackbar from './components/Snackbar/Snackbar';
-import protectedRoutes from './routes/ProtectedRoutes';
-import ProtectedRoute from './routeProtection/ProtectedRoute';
-import publicRoutes from '../src/routes/PublicRoute';
-import Redirect from './routeProtection/ForcedRedirect';
-import { setToken, clearToken, isConnected, setUserProfile } from './store/loginedUser'
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import EmailVerificationForm from "./pages/singleValidator/emailValidator";
+import MultiScrap from "./pages/Multipleurl/Multiurl";
+import Scrap from "./pages/Scrap";
+import MultiEmailValidation from "./pages/MultiemailValidator/multiemailValidator";
+import Pdfscrap from "./pages/Pdfscrap/Pdfscrap";
+import Admin from "./pages/Admin/admin";
+import UserSignup from "./scenes/Register/Signup";
+import Home from "./scenes/Home/Home";
+import LandingPage from "./scenes/LandingPage/Landingpage";
+import UserSignin from "./scenes/Login/Signin";
+import NavBar from "./components/Navbar/Navbar";
+import Snackbar from "./components/Snackbar/Snackbar";
+import ProtectedRoute from "./routeProtection/ProtectedRoute";
+import { isConnected, loggeduser, setRole } from "./store/loginedUser";
+import { useNavigate } from "react-router-dom";
+import ForceRedirect from "./routeProtection/ForcedRedirect";
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const active = useSelector((state) => state.auth.isConnected);
-  const [user, setUser] = useState([]);
+
   const Auth = () => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
@@ -39,9 +39,9 @@ function App() {
           axios
             .get(`http://localhost:8000/user/getuser/${userId}`)
             .then((res) => {
-              console.log("user", res.data);
-              setUser(res.data);
+              dispatch(loggeduser(res.data._id));
               dispatch(isConnected());
+              dispatch(setRole(res.data.role));
             });
         })
         .catch((err) => {
@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     Auth();
-  }, [active]);
+  }, []);
 
   return (
     <>
@@ -60,15 +60,72 @@ function App() {
       <Snackbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Pdfscrap" element={<ProtectedRoute user={active}><Pdfscrap /></ProtectedRoute>} />
-        <Route path="/MultiEmail" element={<ProtectedRoute user={active}><MultiEmailValidation /></ProtectedRoute>} />
-        <Route path="/EmailValidator" element={<ProtectedRoute user={active}><EmailVerificationForm /></ProtectedRoute>} />
-        <Route path="/Multiurl" element={<ProtectedRoute user={active}><MultiScrap /></ProtectedRoute>} />
-        <Route path="/Scrap" element={<ProtectedRoute user={active}><Scrap /></ProtectedRoute>} />
-        <Route path="/Admin" element={<Admin /> }/>
+        <Route
+          path="/Home"
+          element={
+            <ProtectedRoute user={active}>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Pdfscrap"
+          element={
+            <ProtectedRoute user={active}>
+              <Pdfscrap />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MultiEmail"
+          element={
+            <ProtectedRoute user={active}>
+              <MultiEmailValidation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/EmailValidator"
+          element={
+            <ProtectedRoute user={active}>
+              <EmailVerificationForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Multiurl"
+          element={
+            <ProtectedRoute user={active}>
+              <MultiScrap />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Scrap"
+          element={
+            <ProtectedRoute user={active}>
+              <Scrap />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin"
+          element={
+            <ProtectedRoute user={active}>
+              <Admin />{" "}
+            </ProtectedRoute>
+          }
+        />
         <Route path="/Register" element={<UserSignup />} />
-        <Route path="/Login" element={<UserSignin />} />
+        <Route
+          path="/Login"
+          element={
+            <ForceRedirect>
+              {" "}
+              <UserSignin />
+            </ForceRedirect>
+          }
+        />
       </Routes>
     </>
   );
