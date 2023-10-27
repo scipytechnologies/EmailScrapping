@@ -72,7 +72,7 @@ export const signin = async (req, res) => {
 
                     const data = {
                         id: user._id,
-                        role : user.role
+                        role: user.role
                     }
                     // console.log(data);
                     // res.cookie("Authorization", token, options);
@@ -120,3 +120,54 @@ export const getUser = async (req, res) => {
 
     }
 }
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({});
+        console.log(users)
+        const userData = users
+            .filter(user => user.role !== 'admin')
+            .map(user => ({
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role
+            }));
+        res.status(200).json(userData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    console.log("hi",userId)
+
+    try {
+        // Find the user by ID
+        const user = await User.findById(userId);
+        console.log(user)
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if the user has the "admin" role and skip deletion
+        if (user.role === 'admin') {
+            return res.status(403).json({ error: 'Cannot delete admin user' });
+        }
+
+        // If the user is not an admin, delete the user
+        await User.findByIdAndDelete(userId);
+
+        res.status(200).send({ message: 'User deleted successfully' }); // Respond with a 204 status code for a successful deletion
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+
