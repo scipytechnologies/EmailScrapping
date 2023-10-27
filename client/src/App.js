@@ -9,6 +9,7 @@ import MultiScrap from './pages/Multipleurl/Multiurl';
 import Scrap from './pages/Scrap';
 import MultiEmailValidation from './pages/MultiemailValidator/multiemailValidator';
 import Pdfscrap from './pages/Pdfscrap/Pdfscrap';
+import Admin from './pages/Admin/admin';
 import UserSignup from './scenes/Register/Signup';
 import Home from './scenes/Home/Home'
 import LandingPage from './scenes/LandingPage/Landingpage';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/EmailValidator" element={<ProtectedRoute user={active}><EmailVerificationForm /></ProtectedRoute>} />
         <Route path="/Multiurl" element={<ProtectedRoute user={active}><MultiScrap /></ProtectedRoute>} />
         <Route path="/Scrap" element={<ProtectedRoute user={active}><Scrap /></ProtectedRoute>} />
+        <Route path="/Admin" element={<Admin /> }/>
         <Route path="/Register" element={<UserSignup />} />
         <Route path="/Login" element={<UserSignin />} />
       </Routes>
