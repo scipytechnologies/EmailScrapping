@@ -20,7 +20,7 @@ function Scrap() {
       url: url,
     };
     axios
-      .post("http://localhost:8000/scrape/getscrap", body)
+      .post("https://email-scraping.onrender.com/scrape/getscrap", body)
       .then((res) => {
         console.log(res);
         setEmailLinks(res.data.emailLinks);

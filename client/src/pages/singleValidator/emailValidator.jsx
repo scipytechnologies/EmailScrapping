@@ -21,7 +21,7 @@ const EmailValidationForm = () => {
     setdisplayEmail(email);
     try {
       const response = await axios.post(
-        "http://localhost:8000/scrape/verifyemail",
+        "https://email-scraping.onrender.com/scrape/verifyemail",
         { email }
       );
 

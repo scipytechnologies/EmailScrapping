@@ -8,7 +8,7 @@ function UserList() {
   async function fetchUsers() {
     try {
       const response = await axios.get(
-        "http://localhost:8000/user/getallusers"
+        "https://email-scraping.onrender.com/user/getallusers"
       ); // Replace with your API endpoint
       setUsers(response.data); // Assuming your API returns an array of users
     } catch (error) {
@@ -19,7 +19,7 @@ function UserList() {
   async function handleDeleteUser(userId) {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/user/deleteuser/${userId}`
+        `https://email-scraping.onrender.com/user/deleteuser/${userId}`
       );
 
       if (response.status === 200) {

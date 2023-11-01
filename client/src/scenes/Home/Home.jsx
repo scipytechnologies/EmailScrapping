@@ -16,11 +16,11 @@ const Home = () => {
         token,
       };
       axios
-        .post("http://localhost:8000/user/auth", body)
+        .post("https://email-scraping.onrender.com/user/auth", body)
         .then((res) => {
           const userId = res.data?._id;
           axios
-            .get(`http://localhost:8000/user/getuser/${userId}`)
+            .get(`https://email-scraping.onrender.com/user/getuser/${userId}`)
             .then((res) => {
               console.log("user", res.data);
               setUser(res.data);

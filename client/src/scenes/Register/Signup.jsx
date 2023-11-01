@@ -19,7 +19,7 @@ function UserSignup() {
     event.preventDefault();
 
     await axios
-      .post("http://localhost:8000/user/signup", form)
+      .post("https://email-scraping.onrender.com/user/signup", form)
       .then((response) => {
         toast.success("Account Created");
         console.log(response);

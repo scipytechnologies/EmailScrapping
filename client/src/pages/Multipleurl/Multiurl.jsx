@@ -25,7 +25,7 @@ function MultiScrap() {
       const fileContents = await readFileContents(file);
       const urls = fileContents.split("\n").filter(Boolean);
 
-      const response = await fetch("http://localhost:8000/scrape/multipleurl", {
+      const response = await fetch("https://email-scraping.onrender.com/scrape/multipleurl", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

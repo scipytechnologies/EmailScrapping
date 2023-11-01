@@ -21,7 +21,7 @@ const Pdfscrap = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/scrape/pdfscrap",
+        "https://email-scraping.onrender.com/scrape/pdfscrap",
         { url }
       );
       const newLinks = response.data.pdfLinks;

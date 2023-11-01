@@ -11,7 +11,7 @@ const MultiEmailValidation = () => {
     setLoading(true); // Set loading state to true when validation starts
     try {
       const response = await axios.post(
-        "http://localhost:8000/scrape/multiverifyemail",
+        "https://email-scraping.onrender.com/scrape/multiverifyemail",
         {
           emails: emailList.split("\n").map((email) => email.trim()),
         }

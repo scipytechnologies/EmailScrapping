@@ -33,11 +33,11 @@ function App() {
         token,
       };
       axios
-        .post("http://localhost:8000/user/auth", body)
+        .post("https://email-scraping.onrender.com/user/auth", body)
         .then((res) => {
           const userId = res.data?._id;
           axios
-            .get(`http://localhost:8000/user/getuser/${userId}`)
+            .get(`https://email-scraping.onrender.com/user/getuser/${userId}`)
             .then((res) => {
               dispatch(loggeduser(res.data._id));
               dispatch(isConnected());
