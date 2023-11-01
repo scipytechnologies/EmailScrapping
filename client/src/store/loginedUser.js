@@ -16,6 +16,7 @@ export const LoginedUserSlice = createSlice({
     },
     isConnected: (state) => {
       state.isConnected = true;
+      console.log("connected");
     },
     setRole: (state, action) => {
       state.role = action.payload;

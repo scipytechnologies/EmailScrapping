@@ -3,11 +3,12 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { isConnected } from "../../store/loginedUser";
 
 function UserSignin() {
   const dispatch = useDispatch();
-  const active = useSelector((state) => state.loginedUser?.isConnected);
-  const user = useSelector((state) => state.loginedUser);
+  // const active = useSelector((state) => state.loginedUser?.isConnected);
+  // const user = useSelector((state) => state.loginedUser);
 
   const [form, setForm] = useState({});
   // const[id] = useState("")
@@ -28,7 +29,8 @@ function UserSignin() {
         toast.success("Login Successfully");
         const token = response.data.token;
         localStorage.setItem("token", JSON.stringify(token));
-        window.location.reload(false);
+        dispatch(isConnected())
+        // navigate("/Home");
       })
       .catch((err) => toast.error("Please Check Your Login Credential"));
   };

@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     Auth();
-  }, []);
+  }, [active]);
 
   return (
     <>
